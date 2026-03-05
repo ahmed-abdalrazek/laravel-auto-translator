@@ -1,11 +1,11 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Feature;
+namespace Aar\AutoTranslator\Tests\Feature;
 
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Services\KeyGeneratorService;
-use Rz\LaravelAutoTranslator\Tests\TestCase;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Services\KeyGeneratorService;
+use Aar\AutoTranslator\Tests\TestCase;
 
 class KeySyncTest extends TestCase
 {

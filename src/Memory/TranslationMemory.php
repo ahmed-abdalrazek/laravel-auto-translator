@@ -1,9 +1,9 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Memory;
+namespace Aar\AutoTranslator\Memory;
 
 use Illuminate\Support\Facades\Cache;
-use Rz\LaravelAutoTranslator\Models\TranslationMemoryModel;
+use Aar\AutoTranslator\Models\TranslationMemoryModel;
 
 /**
  * TranslationMemory stores and retrieves previously translated phrases
@@ -70,7 +70,7 @@ class TranslationMemory
      */
     protected function cacheKey(string $text, string $sourceLang, string $targetLang): string
     {
-        return 'rz_tm_' . md5("{$sourceLang}:{$targetLang}:{$text}");
+        return 'aar_tm_' . md5("{$sourceLang}:{$targetLang}:{$text}");
     }
 
     /**

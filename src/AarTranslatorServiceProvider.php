@@ -1,45 +1,45 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator;
+namespace Aar\AutoTranslator;
 
 use Illuminate\Support\ServiceProvider;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateAutoCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateCleanCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateExportCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateImportCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateLangCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateScanCommand;
-use Rz\LaravelAutoTranslator\Console\Commands\TranslateStatusCommand;
-use Rz\LaravelAutoTranslator\Memory\TranslationMemory;
-use Rz\LaravelAutoTranslator\Scanners\ProjectScanner;
-use Rz\LaravelAutoTranslator\Services\KeyGeneratorService;
-use Rz\LaravelAutoTranslator\Services\TranslationService;
-use Rz\LaravelAutoTranslator\Translators\TranslatorFactory;
+use Aar\AutoTranslator\Console\Commands\TranslateAutoCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateCleanCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateExportCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateImportCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateLangCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateScanCommand;
+use Aar\AutoTranslator\Console\Commands\TranslateStatusCommand;
+use Aar\AutoTranslator\Memory\TranslationMemory;
+use Aar\AutoTranslator\Scanners\ProjectScanner;
+use Aar\AutoTranslator\Services\KeyGeneratorService;
+use Aar\AutoTranslator\Services\TranslationService;
+use Aar\AutoTranslator\Translators\TranslatorFactory;
 
-class RzTranslatorServiceProvider extends ServiceProvider
+class AarTranslatorServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/rz-translator.php', 'rz-translator');
+        $this->mergeConfigFrom(__DIR__ . '/../config/aar-translator.php', 'aar-translator');
 
         $this->app->singleton(ProjectScanner::class, function ($app) {
-            return new ProjectScanner(config('rz-translator'));
+            return new ProjectScanner(config('aar-translator'));
         });
 
         $this->app->singleton(TranslationMemory::class, function ($app) {
-            return new TranslationMemory(config('rz-translator.memory'));
+            return new TranslationMemory(config('aar-translator.memory'));
         });
 
         $this->app->singleton(TranslatorFactory::class, function ($app) {
             return new TranslatorFactory(
-                config('rz-translator.translator'),
-                config('rz-translator'),
+                config('aar-translator.translator'),
+                config('aar-translator'),
                 $app->make(TranslationMemory::class)
             );
         });
 
         $this->app->singleton(KeyGeneratorService::class, function ($app) {
-            return new KeyGeneratorService(config('rz-translator'));
+            return new KeyGeneratorService(config('aar-translator'));
         });
 
         $this->app->singleton(TranslationService::class, function ($app) {
@@ -47,7 +47,7 @@ class RzTranslatorServiceProvider extends ServiceProvider
                 $app->make(ProjectScanner::class),
                 $app->make(KeyGeneratorService::class),
                 $app->make(TranslatorFactory::class),
-                config('rz-translator')
+                config('aar-translator')
             );
         });
     }
@@ -65,24 +65,24 @@ class RzTranslatorServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             // Config
             $this->publishes([
-                __DIR__ . '/../config/rz-translator.php' => config_path('rz-translator.php'),
-            ], 'rz-translator-config');
+                __DIR__ . '/../config/aar-translator.php' => config_path('aar-translator.php'),
+            ], 'aar-translator-config');
 
             // Migrations
             $this->publishes([
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
-            ], 'rz-translator-migrations');
+            ], 'aar-translator-migrations');
 
             // Views
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/rz-translator'),
-            ], 'rz-translator-views');
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/aar-translator'),
+            ], 'aar-translator-views');
 
             // Assets
             $this->publishes([
-                __DIR__ . '/../resources/js' => public_path('vendor/rz-translator/js'),
-                __DIR__ . '/../resources/css' => public_path('vendor/rz-translator/css'),
-            ], 'rz-translator-assets');
+                __DIR__ . '/../resources/js' => public_path('vendor/aar-translator/js'),
+                __DIR__ . '/../resources/css' => public_path('vendor/aar-translator/css'),
+            ], 'aar-translator-assets');
         }
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -105,13 +105,13 @@ class RzTranslatorServiceProvider extends ServiceProvider
 
     protected function registerRoutes(): void
     {
-        if (config('rz-translator.dashboard.enabled', true)) {
+        if (config('aar-translator.dashboard.enabled', true)) {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
     }
 
     protected function loadViews(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'rz-translator');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'aar-translator');
     }
 }

@@ -1,4 +1,4 @@
-@extends('rz-translator::dashboard.layout')
+@extends('aar-translator::dashboard.layout')
 
 @section('content')
 <div x-data="dashboard()" x-init="init()">
@@ -86,7 +86,7 @@
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Export Translations</h2>
             <div class="flex flex-wrap gap-3">
                 @foreach(['json', 'csv', 'zip'] as $fmt)
-                <a href="{{ route('rz-translator.export', ['format' => $fmt]) }}"
+                <a href="{{ route('aar-translator.export', ['format' => $fmt]) }}"
                    class="inline-flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -128,7 +128,7 @@ function dashboard() {
         async scan() {
             this.scanning = true;
             try {
-                const res = await rzTranslator.post('{{ route('rz-translator.scan') }}');
+                const res = await rzTranslator.post('{{ route('aar-translator.scan') }}');
                 if (res.success) {
                     rzTranslator.notify(res.message);
                     setTimeout(() => location.reload(), 1000);
@@ -145,7 +145,7 @@ function dashboard() {
         async translateMissing() {
             this.translating = true;
             try {
-                const res = await rzTranslator.post('{{ route('rz-translator.translate.missing') }}');
+                const res = await rzTranslator.post('{{ route('aar-translator.translate.missing') }}');
                 if (res.success) {
                     rzTranslator.notify(res.message);
                     setTimeout(() => location.reload(), 1000);
@@ -163,7 +163,7 @@ function dashboard() {
             if (!confirm('Are you sure you want to delete all dead keys? This cannot be undone.')) return;
             this.cleaning = true;
             try {
-                const res = await rzTranslator.del('{{ route('rz-translator.keys.dead.destroy') }}');
+                const res = await rzTranslator.del('{{ route('aar-translator.keys.dead.destroy') }}');
                 if (res.success) {
                     rzTranslator.notify(res.message);
                     setTimeout(() => location.reload(), 1000);
@@ -181,7 +181,7 @@ function dashboard() {
             const form = event.target;
             const formData = new FormData(form);
             try {
-                const res = await fetch('{{ route('rz-translator.import') }}', {
+                const res = await fetch('{{ route('aar-translator.import') }}', {
                     method: 'POST',
                     headers: { 'X-CSRF-TOKEN': rzTranslator.csrfToken, 'Accept': 'application/json' },
                     body: formData,

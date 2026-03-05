@@ -1,15 +1,15 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Dashboard\Controllers;
+namespace Aar\AutoTranslator\Dashboard\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Rz\LaravelAutoTranslator\Export\ExportService;
-use Rz\LaravelAutoTranslator\Export\ImportService;
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Services\DeadKeyDetector;
-use Rz\LaravelAutoTranslator\Services\TranslationService;
+use Aar\AutoTranslator\Export\ExportService;
+use Aar\AutoTranslator\Export\ImportService;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Services\DeadKeyDetector;
+use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslationDashboardController extends Controller
 {
@@ -27,10 +27,10 @@ class TranslationDashboardController extends Controller
     public function index(Request $request)
     {
         $stats = $this->translationService->getStats();
-        $locales = config('rz-translator.locales', ['en']);
+        $locales = config('aar-translator.locales', ['en']);
         $deadStats = $this->deadKeyDetector->stats();
 
-        return view('rz-translator::dashboard.index', compact('stats', 'locales', 'deadStats'));
+        return view('aar-translator::dashboard.index', compact('stats', 'locales', 'deadStats'));
     }
 
     /**
@@ -38,8 +38,8 @@ class TranslationDashboardController extends Controller
      */
     public function keys(Request $request)
     {
-        $locales = config('rz-translator.locales', ['en']);
-        $perPage = config('rz-translator.dashboard.per_page', 50);
+        $locales = config('aar-translator.locales', ['en']);
+        $perPage = config('aar-translator.dashboard.per_page', 50);
 
         $query = TranslationKey::query()->with('values');
 
@@ -75,7 +75,7 @@ class TranslationDashboardController extends Controller
 
         $groups = TranslationKey::select('group')->distinct()->pluck('group');
 
-        return view('rz-translator::dashboard.keys', compact('keys', 'locales', 'groups'));
+        return view('aar-translator::dashboard.keys', compact('keys', 'locales', 'groups'));
     }
 
     /**
@@ -188,7 +188,7 @@ class TranslationDashboardController extends Controller
 
         $uploaded = $request->file('file');
         $ext = strtolower($uploaded->getClientOriginalExtension());
-        $path = $uploaded->store('rz-translator/imports', 'local');
+        $path = $uploaded->store('aar-translator/imports', 'local');
         $fullPath = storage_path('app/' . $path);
 
         try {

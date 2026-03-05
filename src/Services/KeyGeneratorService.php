@@ -1,10 +1,10 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Services;
+namespace Aar\AutoTranslator\Services;
 
 use Illuminate\Support\Str;
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
 
 /**
  * KeyGeneratorService handles:

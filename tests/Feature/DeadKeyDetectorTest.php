@@ -1,11 +1,11 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Feature;
+namespace Aar\AutoTranslator\Tests\Feature;
 
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Services\DeadKeyDetector;
-use Rz\LaravelAutoTranslator\Tests\TestCase;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Services\DeadKeyDetector;
+use Aar\AutoTranslator\Tests\TestCase;
 
 class DeadKeyDetectorTest extends TestCase
 {
@@ -15,7 +15,7 @@ class DeadKeyDetectorTest extends TestCase
         TranslationKey::create(['key' => 'live_key', 'group' => 'test', 'is_dead' => false]);
         TranslationKey::create(['key' => 'dead_key', 'group' => 'test', 'is_dead' => true]);
 
-        $detector = new DeadKeyDetector(config('rz-translator'));
+        $detector = new DeadKeyDetector(config('aar-translator'));
         $deadKeys = $detector->getDeadKeys();
 
         $this->assertCount(1, $deadKeys);
@@ -32,7 +32,7 @@ class DeadKeyDetectorTest extends TestCase
             'value'              => 'Dead',
         ]);
 
-        $detector = new DeadKeyDetector(config('rz-translator'));
+        $detector = new DeadKeyDetector(config('aar-translator'));
         $deleted = $detector->deleteDeadKeys();
 
         $this->assertSame(1, $deleted);
@@ -47,7 +47,7 @@ class DeadKeyDetectorTest extends TestCase
         TranslationKey::create(['key' => 'live2', 'group' => 'test', 'is_dead' => false]);
         TranslationKey::create(['key' => 'dead1', 'group' => 'test', 'is_dead' => true]);
 
-        $detector = new DeadKeyDetector(config('rz-translator'));
+        $detector = new DeadKeyDetector(config('aar-translator'));
         $stats = $detector->stats();
 
         $this->assertSame(3, $stats['total']);
@@ -61,7 +61,7 @@ class DeadKeyDetectorTest extends TestCase
         $key1 = TranslationKey::create(['key' => 'dead1', 'group' => 'test', 'is_dead' => true]);
         $key2 = TranslationKey::create(['key' => 'dead2', 'group' => 'test', 'is_dead' => true]);
 
-        $detector = new DeadKeyDetector(config('rz-translator'));
+        $detector = new DeadKeyDetector(config('aar-translator'));
         $restored = $detector->restoreDeadKeys([$key1->id]);
 
         $this->assertSame(1, $restored);

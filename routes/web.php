@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Rz\LaravelAutoTranslator\Dashboard\Controllers\TranslationDashboardController;
+use Aar\AutoTranslator\Dashboard\Controllers\TranslationDashboardController;
 
-$prefix = config('rz-translator.dashboard.path', 'admin/translations');
-$middleware = config('rz-translator.dashboard.middleware', ['web']);
+$prefix = config('aar-translator.dashboard.path', 'admin/translations');
+$middleware = config('aar-translator.dashboard.middleware', ['web']);
 
 Route::prefix($prefix)
      ->middleware($middleware)
-     ->name('rz-translator.')
+     ->name('aar-translator.')
      ->group(function () {
          Route::get('/', [TranslationDashboardController::class, 'index'])->name('index');
          Route::get('/keys', [TranslationDashboardController::class, 'keys'])->name('keys');

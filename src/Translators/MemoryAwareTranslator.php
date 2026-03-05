@@ -1,8 +1,8 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Translators;
+namespace Aar\AutoTranslator\Translators;
 
-use Rz\LaravelAutoTranslator\Memory\TranslationMemory;
+use Aar\AutoTranslator\Memory\TranslationMemory;
 
 /**
  * Decorator that wraps any translator with Translation Memory support.

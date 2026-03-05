@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Translations Manager – rz/laravel-auto-translator</title>
+    <title>Translations Manager – aar/laravel-auto-translator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -25,9 +25,9 @@
             <span class="font-bold text-lg tracking-wide">Translation Manager</span>
         </div>
         <div class="flex items-center gap-4 text-sm">
-            <a href="{{ route('rz-translator.index') }}" class="hover:text-indigo-200 transition">Dashboard</a>
-            <a href="{{ route('rz-translator.keys') }}" class="hover:text-indigo-200 transition">Keys</a>
-            <a href="{{ route('rz-translator.export') }}" class="hover:text-indigo-200 transition">Export</a>
+            <a href="{{ route('aar-translator.index') }}" class="hover:text-indigo-200 transition">Dashboard</a>
+            <a href="{{ route('aar-translator.keys') }}" class="hover:text-indigo-200 transition">Keys</a>
+            <a href="{{ route('aar-translator.export') }}" class="hover:text-indigo-200 transition">Export</a>
         </div>
     </div>
 </nav>

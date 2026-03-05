@@ -1,6 +1,6 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Translators;
+namespace Aar\AutoTranslator\Translators;
 
 /**
  * Null translator – returns the original text unchanged.

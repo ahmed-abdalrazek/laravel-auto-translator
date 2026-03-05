@@ -1,6 +1,6 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Translators;
+namespace Aar\AutoTranslator\Translators;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Export;
+namespace Aar\AutoTranslator\Export;
 
 use Illuminate\Support\Facades\Storage;
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
 use ZipArchive;
 
 /**
@@ -17,7 +17,7 @@ class ExportService
     public function __construct(protected array $config)
     {
         $this->exportPath = $config['export']['path']
-            ?? storage_path('app/rz-translator/exports');
+            ?? storage_path('app/aar-translator/exports');
 
         if (!is_dir($this->exportPath)) {
             mkdir($this->exportPath, 0755, true);

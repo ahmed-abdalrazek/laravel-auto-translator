@@ -1,10 +1,10 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests;
+namespace Aar\AutoTranslator\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Rz\LaravelAutoTranslator\RzTranslatorServiceProvider;
+use Aar\AutoTranslator\AarTranslatorServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -13,7 +13,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            RzTranslatorServiceProvider::class,
+            AarTranslatorServiceProvider::class,
         ];
     }
 
@@ -26,10 +26,10 @@ abstract class TestCase extends OrchestraTestCase
             'prefix'   => '',
         ]);
 
-        $app['config']->set('rz-translator.locales', ['en', 'ar', 'fr']);
-        $app['config']->set('rz-translator.source_locale', 'en');
-        $app['config']->set('rz-translator.translator', 'null');
-        $app['config']->set('rz-translator.memory.enabled', false);
+        $app['config']->set('aar-translator.locales', ['en', 'ar', 'fr']);
+        $app['config']->set('aar-translator.source_locale', 'en');
+        $app['config']->set('aar-translator.translator', 'null');
+        $app['config']->set('aar-translator.memory.enabled', false);
     }
 
     protected function defineDatabaseMigrations(): void

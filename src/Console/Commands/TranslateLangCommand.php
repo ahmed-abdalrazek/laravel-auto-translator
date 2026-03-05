@@ -1,12 +1,12 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
 
 class TranslateLangCommand extends Command
 {
-    protected $signature = 'rz:translate lang
+    protected $signature = 'aar:translate lang
                             {action : Action to perform: add or remove}
                             {locale : The locale code to add or remove (e.g. de, it, pt)}';
 
@@ -27,15 +27,15 @@ class TranslateLangCommand extends Command
             return self::FAILURE;
         }
 
-        $configPath = config_path('rz-translator.php');
+        $configPath = config_path('aar-translator.php');
 
         if (!file_exists($configPath)) {
-            $this->error('Config file not found. Run: php artisan vendor:publish --tag=rz-translator-config');
+            $this->error('Config file not found. Run: php artisan vendor:publish --tag=aar-translator-config');
             return self::FAILURE;
         }
 
         $content = file_get_contents($configPath);
-        $currentLocales = config('rz-translator.locales', ['en']);
+        $currentLocales = config('aar-translator.locales', ['en']);
 
         if ($action === 'add') {
             if (in_array($locale, $currentLocales)) {
@@ -47,14 +47,14 @@ class TranslateLangCommand extends Command
             $this->updateLocalesInConfig($content, $configPath, $newLocales);
 
             $this->info("✅ Locale '{$locale}' added successfully.");
-            $this->line("  Run <comment>php artisan rz:translate auto --locale={$locale}</comment> to generate translations.");
+            $this->line("  Run <comment>php artisan aar:translate auto --locale={$locale}</comment> to generate translations.");
         } else {
             if (!in_array($locale, $currentLocales)) {
                 $this->warn("Locale '{$locale}' is not currently configured.");
                 return self::SUCCESS;
             }
 
-            if ($locale === config('rz-translator.source_locale', 'en')) {
+            if ($locale === config('aar-translator.source_locale', 'en')) {
                 $this->error("Cannot remove the source locale '{$locale}'.");
                 return self::FAILURE;
             }
