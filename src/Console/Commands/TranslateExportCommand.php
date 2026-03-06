@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Export\ExportService;
 
 class TranslateExportCommand extends Command
 {
-    protected $signature = 'aar:translate export
+    protected $signature = 'aar:export
                             {--format=json : Export format: json, csv, or zip}
                             {--locale= : Export only a specific locale}';
 

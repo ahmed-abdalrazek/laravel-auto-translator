@@ -10,8 +10,11 @@ use Aar\AutoTranslator\Console\Commands\TranslateImportCommand;
 use Aar\AutoTranslator\Console\Commands\TranslateLangCommand;
 use Aar\AutoTranslator\Console\Commands\TranslateScanCommand;
 use Aar\AutoTranslator\Console\Commands\TranslateStatusCommand;
+use Aar\AutoTranslator\Export\ExportService;
+use Aar\AutoTranslator\Export\ImportService;
 use Aar\AutoTranslator\Memory\TranslationMemory;
 use Aar\AutoTranslator\Scanners\ProjectScanner;
+use Aar\AutoTranslator\Services\DeadKeyDetector;
 use Aar\AutoTranslator\Services\KeyGeneratorService;
 use Aar\AutoTranslator\Services\TranslationService;
 use Aar\AutoTranslator\Translators\TranslatorFactory;
@@ -47,6 +50,21 @@ class AarTranslatorServiceProvider extends ServiceProvider
                 $app->make(ProjectScanner::class),
                 $app->make(KeyGeneratorService::class),
                 $app->make(TranslatorFactory::class),
+                config('aar-translator')
+            );
+        });
+
+        $this->app->singleton(DeadKeyDetector::class, function ($app) {
+            return new DeadKeyDetector(config('aar-translator'));
+        });
+
+        $this->app->singleton(ExportService::class, function ($app) {
+            return new ExportService(config('aar-translator'));
+        });
+
+        $this->app->singleton(ImportService::class, function ($app) {
+            return new ImportService(
+                $app->make(KeyGeneratorService::class),
                 config('aar-translator')
             );
         });

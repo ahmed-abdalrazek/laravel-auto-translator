@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class TranslateLangCommand extends Command
 {
-    protected $signature = 'aar:translate lang
+    protected $signature = 'aar:lang
                             {action : Action to perform: add or remove}
                             {locale : The locale code to add or remove (e.g. de, it, pt)}';
 
@@ -47,7 +47,7 @@ class TranslateLangCommand extends Command
             $this->updateLocalesInConfig($content, $configPath, $newLocales);
 
             $this->info("✅ Locale '{$locale}' added successfully.");
-            $this->line("  Run <comment>php artisan aar:translate auto --locale={$locale}</comment> to generate translations.");
+            $this->line("  Run <comment>php artisan aar:auto --locale={$locale}</comment> to generate translations.");
         } else {
             if (!in_array($locale, $currentLocales)) {
                 $this->warn("Locale '{$locale}' is not currently configured.");

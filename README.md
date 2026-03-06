@@ -115,70 +115,70 @@ OPENAI_MODEL=gpt-4o-mini
 
 ## CLI Commands
 
-All commands use the `aar:translate` prefix.
+All commands use the `aar:` prefix.
 
 ### Scan Project
 
 ```bash
 # Incremental scan (skips unchanged files)
-php artisan aar:translate scan
+php artisan aar:scan
 
 # Full scan (clears file hash cache)
-php artisan aar:translate scan --fresh
+php artisan aar:scan --fresh
 
 # Scan and immediately export to language files
-php artisan aar:translate scan --export
+php artisan aar:scan --export
 ```
 
 ### Auto-Translate Missing Keys
 
 ```bash
 # Translate all missing keys for all locales
-php artisan aar:translate auto
+php artisan aar:auto
 
 # Translate a specific locale only
-php artisan aar:translate auto --locale=ar
+php artisan aar:auto --locale=ar
 
 # Override the provider for this run
-php artisan aar:translate auto --provider=deepl
+php artisan aar:auto --provider=deepl
 
 # Translate and export to files
-php artisan aar:translate auto --export
+php artisan aar:auto --export
 ```
 
 ### Clean Dead Keys
 
 ```bash
 # Preview dead keys without deleting (dry run)
-php artisan aar:translate clean --dry-run
+php artisan aar:clean --dry-run
 
 # Delete dead keys (with confirmation prompt)
-php artisan aar:translate clean
+php artisan aar:clean
 
 # Delete without confirmation
-php artisan aar:translate clean --force
+php artisan aar:clean --force
 ```
 
 ### Export Translations
 
 ```bash
-php artisan aar:translate export               # JSON (default)
-php artisan aar:translate export --format=csv  # CSV
-php artisan aar:translate export --format=zip  # ZIP (one JSON per locale)
-php artisan aar:translate export --locale=ar   # Export single locale
+php artisan aar:export               # JSON (default)
+php artisan aar:export --format=csv  # CSV
+php artisan aar:export --format=zip  # ZIP (one JSON per locale)
+php artisan aar:export --locale=ar   # Export single locale
 ```
 
 ### Import Translations
 
 ```bash
-php artisan aar:translate import translations.json
-php artisan aar:translate import translations.csv
+php artisan aar:import translations.json
+php artisan aar:import translations.csv
 ```
 
 ### Translation Status
 
 ```bash
-php artisan aar:translate status
+php artisan aar:status
 ```
 
 Example output:
@@ -198,10 +198,10 @@ Example output:
 
 ```bash
 # Add a new locale
-php artisan aar:translate lang add de
+php artisan aar:lang add de
 
 # Remove a locale
-php artisan aar:translate lang remove es
+php artisan aar:lang remove es
 ```
 
 ---

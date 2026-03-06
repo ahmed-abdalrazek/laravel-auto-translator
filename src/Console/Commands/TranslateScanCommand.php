@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslateScanCommand extends Command
 {
-    protected $signature = 'aar:translate scan
+    protected $signature = 'aar:scan
                             {--fresh : Clear file cache and do a full scan}
                             {--export : Export results to language files after scanning}';
 
@@ -51,11 +51,11 @@ class TranslateScanCommand extends Command
         }
 
         if ($result['dead'] > 0) {
-            $this->warn("⚠️  {$result['dead']} dead keys detected. Run <comment>aar:translate clean</comment> to remove them.");
+            $this->warn("⚠️  {$result['dead']} dead keys detected. Run <comment>aar:clean</comment> to remove them.");
         }
 
         if ($this->option('export')) {
-            $this->call('aar:translate export');
+            $this->call('aar:export');
         }
 
         return self::SUCCESS;
