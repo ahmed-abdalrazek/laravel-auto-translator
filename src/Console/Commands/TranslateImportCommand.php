@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Export\ImportService;
 
 class TranslateImportCommand extends Command
 {
-    protected $signature = 'aar:translate import
+    protected $signature = 'aar:import
                             {file : Path to the JSON or CSV file to import}
                             {--format= : Import format: json or csv (auto-detected from extension if not set)}';
 

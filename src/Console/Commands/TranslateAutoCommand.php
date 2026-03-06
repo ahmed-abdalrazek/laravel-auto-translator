@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslateAutoCommand extends Command
 {
-    protected $signature = 'aar:translate auto
+    protected $signature = 'aar:auto
                             {--locale= : Translate only a specific locale}
                             {--provider= : Override the configured translation provider}
                             {--export : Export to language files after translating}';
@@ -49,7 +49,7 @@ class TranslateAutoCommand extends Command
         }
 
         if ($this->option('export')) {
-            $this->call('aar:translate export');
+            $this->call('aar:export');
         }
 
         return self::SUCCESS;

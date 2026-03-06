@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslateStatusCommand extends Command
 {
-    protected $signature = 'aar:translate status';
+    protected $signature = 'aar:status';
 
     protected $description = 'Show translation key statistics and completion percentages';
 

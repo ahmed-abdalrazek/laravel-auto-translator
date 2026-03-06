@@ -7,7 +7,7 @@ use Aar\AutoTranslator\Services\DeadKeyDetector;
 
 class TranslateCleanCommand extends Command
 {
-    protected $signature = 'aar:translate clean
+    protected $signature = 'aar:clean
                             {--dry-run : Show dead keys without deleting them}
                             {--force : Skip confirmation prompt}';
 
