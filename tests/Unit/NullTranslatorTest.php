@@ -1,9 +1,9 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Unit;
+namespace Aar\AutoTranslator\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Rz\LaravelAutoTranslator\Translators\NullTranslator;
+use Aar\AutoTranslator\Translators\NullTranslator;
 
 class NullTranslatorTest extends TestCase
 {

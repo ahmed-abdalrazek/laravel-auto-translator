@@ -1,14 +1,14 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Feature;
+namespace Aar\AutoTranslator\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Export\ExportService;
-use Rz\LaravelAutoTranslator\Export\ImportService;
-use Rz\LaravelAutoTranslator\Services\KeyGeneratorService;
-use Rz\LaravelAutoTranslator\Tests\TestCase;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Export\ExportService;
+use Aar\AutoTranslator\Export\ImportService;
+use Aar\AutoTranslator\Services\KeyGeneratorService;
+use Aar\AutoTranslator\Tests\TestCase;
 
 class ExportImportTest extends TestCase
 {
@@ -17,7 +17,7 @@ class ExportImportTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->tmpDir = sys_get_temp_dir() . '/rz-export-test-' . uniqid();
+        $this->tmpDir = sys_get_temp_dir() . '/aar-export-test-' . uniqid();
         mkdir($this->tmpDir, 0755, true);
     }
 
@@ -76,8 +76,8 @@ class ExportImportTest extends TestCase
         ];
         file_put_contents($jsonFile, json_encode($data));
 
-        $keyGen = new KeyGeneratorService(config('rz-translator'));
-        $service = new ImportService($keyGen, config('rz-translator'));
+        $keyGen = new KeyGeneratorService(config('aar-translator'));
+        $service = new ImportService($keyGen, config('aar-translator'));
         $result = $service->importJson($jsonFile);
 
         $this->assertGreaterThan(0, $result['imported']);
@@ -94,8 +94,8 @@ class ExportImportTest extends TestCase
         fputcsv($handle, ['auth', 'logout', 'Logout', 'Déconnexion']);
         fclose($handle);
 
-        $keyGen = new KeyGeneratorService(config('rz-translator'));
-        $service = new ImportService($keyGen, config('rz-translator'));
+        $keyGen = new KeyGeneratorService(config('aar-translator'));
+        $service = new ImportService($keyGen, config('aar-translator'));
         $result = $service->importCsv($csvFile);
 
         $this->assertGreaterThan(0, $result['imported']);
@@ -112,7 +112,7 @@ class ExportImportTest extends TestCase
 
     private function exportConfig(): array
     {
-        return array_merge(config('rz-translator'), [
+        return array_merge(config('aar-translator'), [
             'export' => ['path' => $this->tmpDir],
             'locales' => ['en', 'fr'],
         ]);

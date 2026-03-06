@@ -1,13 +1,13 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rz\LaravelAutoTranslator\Services\TranslationService;
+use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslateScanCommand extends Command
 {
-    protected $signature = 'rz:translate scan
+    protected $signature = 'aar:translate scan
                             {--fresh : Clear file cache and do a full scan}
                             {--export : Export results to language files after scanning}';
 
@@ -22,8 +22,8 @@ class TranslateScanCommand extends Command
         if (!$incremental) {
             $this->line('  <comment>Running full scan (cache cleared)</comment>');
             // Clear file cache
-            $cachePath = config('rz-translator.file_cache.path')
-                ?? storage_path('app/rz-translator/file-cache.json');
+            $cachePath = config('aar-translator.file_cache.path')
+                ?? storage_path('app/aar-translator/file-cache.json');
             if (file_exists($cachePath)) {
                 unlink($cachePath);
             }
@@ -51,11 +51,11 @@ class TranslateScanCommand extends Command
         }
 
         if ($result['dead'] > 0) {
-            $this->warn("⚠️  {$result['dead']} dead keys detected. Run <comment>rz:translate clean</comment> to remove them.");
+            $this->warn("⚠️  {$result['dead']} dead keys detected. Run <comment>aar:translate clean</comment> to remove them.");
         }
 
         if ($this->option('export')) {
-            $this->call('rz:translate export');
+            $this->call('aar:translate export');
         }
 
         return self::SUCCESS;

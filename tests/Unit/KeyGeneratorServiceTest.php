@@ -1,9 +1,9 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Unit;
+namespace Aar\AutoTranslator\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Rz\LaravelAutoTranslator\Services\KeyGeneratorService;
+use Aar\AutoTranslator\Services\KeyGeneratorService;
 
 class KeyGeneratorServiceTest extends TestCase
 {

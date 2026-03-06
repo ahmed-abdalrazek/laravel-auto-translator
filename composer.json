@@ -1,7 +1,7 @@
 {
-    "name": "rz/laravel-auto-translator",
+    "name": "aar/laravel-auto-translator",
     "description": "A comprehensive, high-performance translation management system for Laravel with AI translation, dashboard UI, and CLI tools.",
-    "keywords": ["laravel", "translation", "i18n", "localization", "ai", "livewire", "tailwind"],
+    "keywords": ["laravel", "translation", "i18n", "localization", "ai", "tailwind", "alpine"],
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -28,18 +28,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Rz\\LaravelAutoTranslator\\": "src/"
+            "Aar\\AutoTranslator\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rz\\LaravelAutoTranslator\\Tests\\": "tests/"
+            "Aar\\AutoTranslator\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Rz\\LaravelAutoTranslator\\RzTranslatorServiceProvider"
+                "Aar\\AutoTranslator\\AarTranslatorServiceProvider"
             ]
         }
     },

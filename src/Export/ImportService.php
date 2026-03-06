@@ -1,10 +1,10 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Export;
+namespace Aar\AutoTranslator\Export;
 
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Services\KeyGeneratorService;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Services\KeyGeneratorService;
 
 /**
  * ImportService: imports translations from JSON or CSV files into the database.

@@ -1,13 +1,13 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rz\LaravelAutoTranslator\Export\ExportService;
+use Aar\AutoTranslator\Export\ExportService;
 
 class TranslateExportCommand extends Command
 {
-    protected $signature = 'rz:translate export
+    protected $signature = 'aar:translate export
                             {--format=json : Export format: json, csv, or zip}
                             {--locale= : Export only a specific locale}';
 

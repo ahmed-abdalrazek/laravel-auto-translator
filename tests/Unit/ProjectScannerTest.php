@@ -1,9 +1,9 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Tests\Unit;
+namespace Aar\AutoTranslator\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Rz\LaravelAutoTranslator\Scanners\ProjectScanner;
+use Aar\AutoTranslator\Scanners\ProjectScanner;
 
 class ProjectScannerTest extends TestCase
 {
@@ -12,7 +12,7 @@ class ProjectScannerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->tmpDir = sys_get_temp_dir() . '/rz-scanner-test-' . uniqid();
+        $this->tmpDir = sys_get_temp_dir() . '/aar-scanner-test-' . uniqid();
         mkdir($this->tmpDir, 0755, true);
         mkdir($this->tmpDir . '/app', 0755, true);
         mkdir($this->tmpDir . '/resources', 0755, true);

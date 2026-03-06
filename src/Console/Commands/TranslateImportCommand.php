@@ -1,13 +1,13 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rz\LaravelAutoTranslator\Export\ImportService;
+use Aar\AutoTranslator\Export\ImportService;
 
 class TranslateImportCommand extends Command
 {
-    protected $signature = 'rz:translate import
+    protected $signature = 'aar:translate import
                             {file : Path to the JSON or CSV file to import}
                             {--format= : Import format: json or csv (auto-detected from extension if not set)}';
 

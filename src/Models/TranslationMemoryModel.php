@@ -1,6 +1,6 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Models;
+namespace Aar\AutoTranslator\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

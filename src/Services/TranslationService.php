@@ -1,11 +1,11 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Services;
+namespace Aar\AutoTranslator\Services;
 
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
-use Rz\LaravelAutoTranslator\Scanners\ProjectScanner;
-use Rz\LaravelAutoTranslator\Translators\TranslatorFactory;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Scanners\ProjectScanner;
+use Aar\AutoTranslator\Translators\TranslatorFactory;
 
 /**
  * TranslationService orchestrates the full translation workflow:

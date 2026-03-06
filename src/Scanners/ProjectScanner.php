@@ -1,6 +1,6 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Scanners;
+namespace Aar\AutoTranslator\Scanners;
 
 use Symfony\Component\Finder\Finder;
 
@@ -128,7 +128,7 @@ class ProjectScanner
     protected function loadFileCache(): void
     {
         $cachePath = $this->config['file_cache']['path']
-            ?? storage_path('app/rz-translator/file-cache.json');
+            ?? storage_path('app/aar-translator/file-cache.json');
 
         if (file_exists($cachePath)) {
             $data = json_decode(file_get_contents($cachePath), true);
@@ -146,7 +146,7 @@ class ProjectScanner
         }
 
         $cachePath = $this->config['file_cache']['path']
-            ?? storage_path('app/rz-translator/file-cache.json');
+            ?? storage_path('app/aar-translator/file-cache.json');
 
         $dir = dirname($cachePath);
         if (!is_dir($dir)) {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rz\LaravelAutoTranslator\Services\TranslationService;
+use Aar\AutoTranslator\Services\TranslationService;
 
 class TranslateAutoCommand extends Command
 {
-    protected $signature = 'rz:translate auto
+    protected $signature = 'aar:translate auto
                             {--locale= : Translate only a specific locale}
                             {--provider= : Override the configured translation provider}
                             {--export : Export to language files after translating}';
@@ -22,7 +22,7 @@ class TranslateAutoCommand extends Command
         $this->info("🤖 Auto-translating missing keys for {$target}...");
 
         if ($this->option('provider')) {
-            config(['rz-translator.translator' => $this->option('provider')]);
+            config(['aar-translator.translator' => $this->option('provider')]);
             $this->line("  Using provider: <comment>{$this->option('provider')}</comment>");
         }
 
@@ -49,7 +49,7 @@ class TranslateAutoCommand extends Command
         }
 
         if ($this->option('export')) {
-            $this->call('rz:translate export');
+            $this->call('aar:translate export');
         }
 
         return self::SUCCESS;

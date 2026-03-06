@@ -1,8 +1,8 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Translators;
+namespace Aar\AutoTranslator\Translators;
 
-use Rz\LaravelAutoTranslator\Memory\TranslationMemory;
+use Aar\AutoTranslator\Memory\TranslationMemory;
 
 /**
  * TranslatorFactory creates the appropriate translator based on configuration.

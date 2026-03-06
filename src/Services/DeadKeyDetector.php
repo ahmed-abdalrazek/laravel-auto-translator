@@ -1,9 +1,9 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Services;
+namespace Aar\AutoTranslator\Services;
 
-use Rz\LaravelAutoTranslator\Models\TranslationKey;
-use Rz\LaravelAutoTranslator\Models\TranslationValue;
+use Aar\AutoTranslator\Models\TranslationKey;
+use Aar\AutoTranslator\Models\TranslationValue;
 
 /**
  * Detects and removes dead translation keys –

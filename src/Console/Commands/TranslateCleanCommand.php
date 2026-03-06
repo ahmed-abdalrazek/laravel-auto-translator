@@ -1,13 +1,13 @@
 <?php
 
-namespace Rz\LaravelAutoTranslator\Console\Commands;
+namespace Aar\AutoTranslator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rz\LaravelAutoTranslator\Services\DeadKeyDetector;
+use Aar\AutoTranslator\Services\DeadKeyDetector;
 
 class TranslateCleanCommand extends Command
 {
-    protected $signature = 'rz:translate clean
+    protected $signature = 'aar:translate clean
                             {--dry-run : Show dead keys without deleting them}
                             {--force : Skip confirmation prompt}';
 

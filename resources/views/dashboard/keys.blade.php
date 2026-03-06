@@ -1,4 +1,4 @@
-@extends('rz-translator::dashboard.layout')
+@extends('aar-translator::dashboard.layout')
 
 @section('content')
 <div x-data="keysPage()" x-init="init()">
@@ -9,13 +9,13 @@
             <h1 class="text-2xl font-bold text-gray-900">Translation Keys</h1>
             <p class="mt-1 text-sm text-gray-500">Browse, search, and edit all translation strings.</p>
         </div>
-        <a href="{{ route('rz-translator.index') }}"
+        <a href="{{ route('aar-translator.index') }}"
            class="text-sm text-indigo-600 hover:text-indigo-800 transition">← Dashboard</a>
     </div>
 
     {{-- Filters --}}
     <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 mb-5">
-        <form method="GET" action="{{ route('rz-translator.keys') }}" class="flex flex-wrap items-center gap-3">
+        <form method="GET" action="{{ route('aar-translator.keys') }}" class="flex flex-wrap items-center gap-3">
             {{-- Search --}}
             <div class="relative flex-1 min-w-48">
                 <input type="text" name="search" value="{{ request('search') }}"
@@ -53,7 +53,7 @@
                 Filter
             </button>
             @if(request()->hasAny(['search','group','missing','dead']))
-            <a href="{{ route('rz-translator.keys') }}" class="text-sm text-gray-500 hover:text-gray-700 transition">Clear</a>
+            <a href="{{ route('aar-translator.keys') }}" class="text-sm text-gray-500 hover:text-gray-700 transition">Clear</a>
             @endif
         </form>
     </div>
@@ -103,7 +103,7 @@
                                     }
                                     this.saving = true;
                                     const res = await rzTranslator.put(
-                                        '{{ url(config('rz-translator.dashboard.path', 'admin/translations') . '/values') }}/' + this.valueId,
+                                        '{{ url(config('aar-translator.dashboard.path', 'admin/translations') . '/values') }}/' + this.valueId,
                                         { value: this.val }
                                     );
                                     this.saving = false;
@@ -174,7 +174,7 @@ function keyRow(keyId) {
     return {
         async deleteKey() {
             if (!confirm('Delete this key and all its translations?')) return;
-            const res = await rzTranslator.del(`{{ url(config('rz-translator.dashboard.path', 'admin/translations') . '/keys') }}/${keyId}`);
+            const res = await rzTranslator.del(`{{ url(config('aar-translator.dashboard.path', 'admin/translations') . '/keys') }}/${keyId}`);
             if (res.success) {
                 rzTranslator.notify('Key deleted');
                 this.$el.remove();

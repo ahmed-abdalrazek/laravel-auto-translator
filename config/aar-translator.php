@@ -89,7 +89,7 @@ return [
     | The default AI provider to use for automatic translations.
     | Options: 'libretranslate', 'argos', 'google', 'deepl', 'openai', 'null'
     */
-    'translator' => env('RZ_TRANSLATOR_PROVIDER', 'libretranslate'),
+    'translator' => env('AAR_TRANSLATOR_PROVIDER', 'libretranslate'),
 
     /*
     |--------------------------------------------------------------------------
@@ -149,7 +149,7 @@ return [
     */
     'file_cache' => [
         'enabled' => true,
-        'path'    => storage_path('app/rz-translator/file-cache.json'),
+        'path'    => storage_path('app/aar-translator/file-cache.json'),
     ],
 
     /*
@@ -180,7 +180,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'export' => [
-        'path'    => storage_path('app/rz-translator/exports'),
+        'path'    => storage_path('app/aar-translator/exports'),
         'formats' => ['json', 'csv', 'zip'],
     ],
 

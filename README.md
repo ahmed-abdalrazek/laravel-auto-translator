@@ -1,7 +1,9 @@
-# rz/laravel-auto-translator
+# aar/laravel-auto-translator
 
 A **production-ready, high-performance translation management system** for Laravel.  
 Handles **10,000+ translation keys** with AI-powered translations, a modern dashboard, CLI tools, and full database storage.
+
+> ✅ Ready for **GitHub** and **Packagist** — `composer require aar/laravel-auto-translator`
 
 ---
 
@@ -32,13 +34,13 @@ Handles **10,000+ translation keys** with AI-powered translations, a modern dash
 ## Installation
 
 ```bash
-composer require rz/laravel-auto-translator
+composer require aar/laravel-auto-translator
 ```
 
 ### Publish Configuration
 
 ```bash
-php artisan vendor:publish --tag=rz-translator-config
+php artisan vendor:publish --tag=aar-translator-config
 ```
 
 ### Run Migrations
@@ -51,7 +53,7 @@ php artisan migrate
 
 ## Configuration
 
-The config file is at `config/rz-translator.php` after publishing.
+The config file is at `config/aar-translator.php` after publishing.
 
 ### Key Settings
 
@@ -62,7 +64,7 @@ return [
     'storage'       => 'both',          // 'file', 'database', or 'both'
     'scan_paths'    => ['app', 'resources'],
     'excluded_dirs' => ['vendor', 'node_modules', 'storage'],
-    'translator'    => env('RZ_TRANSLATOR_PROVIDER', 'libretranslate'),
+    'translator'    => env('AAR_TRANSLATOR_PROVIDER', 'libretranslate'),
     'memory'        => ['enabled' => true, 'driver' => 'database'],
     'dashboard'     => [
         'enabled'    => true,
@@ -79,7 +81,7 @@ return [
 ### LibreTranslate (Free, Open-Source – Default)
 
 ```env
-RZ_TRANSLATOR_PROVIDER=libretranslate
+AAR_TRANSLATOR_PROVIDER=libretranslate
 LIBRETRANSLATE_URL=https://libretranslate.com
 LIBRETRANSLATE_API_KEY=your-optional-api-key
 ```
@@ -89,7 +91,7 @@ Self-host for free: `pip install libretranslate && libretranslate --host 0.0.0.0
 ### DeepL
 
 ```env
-RZ_TRANSLATOR_PROVIDER=deepl
+AAR_TRANSLATOR_PROVIDER=deepl
 DEEPL_API_KEY=your-deepl-api-key
 DEEPL_FREE_API=true
 ```
@@ -97,15 +99,15 @@ DEEPL_FREE_API=true
 ### Google Translate
 
 ```env
-RZ_TRANSLATOR_PROVIDER=google
+AAR_TRANSLATOR_PROVIDER=google
 GOOGLE_TRANSLATE_API_KEY=your-google-api-key
 ```
 
-### OpenAI
+### OpenAI (GPT-4o-mini or better)
 
 ```env
-RZ_TRANSLATOR_PROVIDER=openai
-OPENAI_API_KEY=your-openai-api-key
+AAR_TRANSLATOR_PROVIDER=openai
+OPENAI_API_KEY=your-openai-key
 OPENAI_MODEL=gpt-4o-mini
 ```
 
@@ -113,129 +115,282 @@ OPENAI_MODEL=gpt-4o-mini
 
 ## CLI Commands
 
+All commands use the `aar:translate` prefix.
+
 ### Scan Project
 
 ```bash
-php artisan rz:translate scan           # Incremental scan
-php artisan rz:translate scan --fresh   # Full scan (clears cache)
-php artisan rz:translate scan --export  # Scan + export to files
+# Incremental scan (skips unchanged files)
+php artisan aar:translate scan
+
+# Full scan (clears file hash cache)
+php artisan aar:translate scan --fresh
+
+# Scan and immediately export to language files
+php artisan aar:translate scan --export
 ```
 
-### Auto-Translate
+### Auto-Translate Missing Keys
 
 ```bash
-php artisan rz:translate auto                    # All locales
-php artisan rz:translate auto --locale=ar        # Single locale
-php artisan rz:translate auto --provider=deepl   # Override provider
+# Translate all missing keys for all locales
+php artisan aar:translate auto
+
+# Translate a specific locale only
+php artisan aar:translate auto --locale=ar
+
+# Override the provider for this run
+php artisan aar:translate auto --provider=deepl
+
+# Translate and export to files
+php artisan aar:translate auto --export
 ```
 
 ### Clean Dead Keys
 
 ```bash
-php artisan rz:translate clean              # Interactive
-php artisan rz:translate clean --dry-run    # Preview only
-php artisan rz:translate clean --force      # No confirmation
+# Preview dead keys without deleting (dry run)
+php artisan aar:translate clean --dry-run
+
+# Delete dead keys (with confirmation prompt)
+php artisan aar:translate clean
+
+# Delete without confirmation
+php artisan aar:translate clean --force
 ```
 
-### Export
+### Export Translations
 
 ```bash
-php artisan rz:translate export --format=json
-php artisan rz:translate export --format=csv
-php artisan rz:translate export --format=zip
-php artisan rz:translate export --locale=ar   # Single locale
+php artisan aar:translate export               # JSON (default)
+php artisan aar:translate export --format=csv  # CSV
+php artisan aar:translate export --format=zip  # ZIP (one JSON per locale)
+php artisan aar:translate export --locale=ar   # Export single locale
 ```
 
-### Import
+### Import Translations
 
 ```bash
-php artisan rz:translate import /path/to/file.json
-php artisan rz:translate import /path/to/file.csv
+php artisan aar:translate import translations.json
+php artisan aar:translate import translations.csv
 ```
 
-**JSON format:** `{ "locale": { "group": { "key": "value" } } }`  
-**CSV format:** `group,key,en,fr,ar,...`
-
-### Status
+### Translation Status
 
 ```bash
-php artisan rz:translate status
+php artisan aar:translate status
+```
+
+Example output:
+```
+📊 Translation Status
+
+  Total Keys : 142
+  Dead Keys  : 3
+
+ Locale  Translated  Missing  Total  Progress
+ EN      142         0        142    100.0% [████████████████████]
+ AR      87          55       142    61.3%  [████████████░░░░░░░░]
+ FR      130         12       142    91.5%  [██████████████████░░]
 ```
 
 ### Manage Locales
 
 ```bash
-php artisan rz:translate lang add de
-php artisan rz:translate lang remove es
+# Add a new locale
+php artisan aar:translate lang add de
+
+# Remove a locale
+php artisan aar:translate lang remove es
 ```
 
 ---
 
 ## Dashboard
 
-Accessible at `/admin/translations` (configurable).
+Access the web dashboard at `/admin/translations` (configurable).
 
-### Features
+### Dashboard Features
 
-- 📊 Overview cards with total keys, dead keys, missing translations
-- 📈 Locale completion progress bars
-- 🔍 Search + filter by group/file/language/status
-- ✏️ Inline cell editing (double-click to edit)
-- 🤖 One-click auto-translate all missing keys
-- 🔄 Scan project from browser
-- 🗑️ Bulk delete dead keys
-- 📦 Export (JSON/CSV/ZIP) and import via file upload
+- **Overview**: Total keys, dead keys, missing translations, locale completion bars
+- **Keys List**: Paginated table with search, group filter, missing-only filter
+- **Inline Editing**: Click any translation to edit it directly in the browser
+- **Bulk Actions**: Delete all dead keys, trigger scan, trigger auto-translate
+- **Export**: Download JSON, CSV, or ZIP directly from the browser
+- **Import**: Upload a JSON or CSV file to import translations
 
 ### Securing the Dashboard
 
+Edit `config/aar-translator.php`:
+
 ```php
 'dashboard' => [
-    'middleware' => ['web', 'auth', 'can:manage-translations'],
+    'enabled'    => true,
+    'path'       => 'admin/translations',
+    'middleware' => ['web', 'auth'],        // Require authenticated users
+    // Or with permissions:
+    // 'middleware' => ['web', 'can:manage-translations'],
 ],
 ```
 
 ---
 
-## Key Detection Patterns
-
-| Pattern | Language |
-|---|---|
-| `__('key')`, `trans('key')`, `Lang::get('key')` | PHP |
-| `@lang('key')` | Blade |
-| `t('key')`, `i18n.t('key')`, `$t('key')` | JS/Vue/React |
-
----
-
-## Auto-Format Keys
-
-When `auto_format_keys` is `true` (default):
-
-| Key | Generated English |
-|---|---|
-| `order_summary` | "Order Summary" |
-| `auth.login` | "Login" |
-| `user_profile` | "User Profile" |
-
----
-
-## Testing
+## Publishing Assets
 
 ```bash
-./vendor/bin/phpunit
+# Publish config
+php artisan vendor:publish --tag=aar-translator-config
+
+# Publish migrations
+php artisan vendor:publish --tag=aar-translator-migrations
+
+# Publish views (to customise the dashboard)
+php artisan vendor:publish --tag=aar-translator-views
 ```
 
 ---
 
 ## Database Tables
 
-| Table | Description |
+The package creates three tables:
+
+| Table | Purpose |
 |---|---|
-| `translation_keys` | `id`, `key`, `group`, `file`, `is_dead` |
-| `translation_values` | `id`, `translation_key_id`, `locale`, `value`, `is_auto_translated`, `provider` |
-| `translation_memory` | `id`, `source_text`, `source_hash`, `source_lang`, `target_lang`, `translated_text`, `provider`, `use_count` |
+| `translation_keys` | Stores each unique translation key with group and dead-key flag |
+| `translation_values` | Stores the translated value per key and locale |
+| `translation_memory` | Caches previously translated phrases to avoid redundant API calls |
+
+---
+
+## Translation Memory
+
+Translation memory prevents duplicate API calls by caching phrase-to-phrase translations.
+
+```php
+// config/aar-translator.php
+'memory' => [
+    'enabled' => true,
+    'driver'  => 'database',   // 'database' or 'cache'
+],
+```
+
+Use `'driver' => 'cache'` for Redis-backed memory in high-traffic apps.
+
+---
+
+## Incremental Scanning
+
+File hashes are cached in `storage/app/aar-translator/file-cache.json`. Only modified files are re-scanned on subsequent runs, making it fast even for large codebases.
+
+---
+
+## Package Structure
+
+```
+aar/laravel-auto-translator/
+├── config/
+│   └── aar-translator.php          # Main configuration
+├── database/
+│   └── migrations/
+│       ├── ...create_translation_keys_table.php
+│       ├── ...create_translation_values_table.php
+│       └── ...create_translation_memory_table.php
+├── resources/
+│   └── views/
+│       └── dashboard/
+│           ├── layout.blade.php
+│           ├── index.blade.php     # Dashboard overview
+│           └── keys.blade.php      # Keys management
+├── routes/
+│   └── web.php
+├── src/
+│   ├── AarTranslatorServiceProvider.php
+│   ├── Console/Commands/           # All CLI commands
+│   ├── Dashboard/Controllers/      # Web dashboard
+│   ├── Export/                     # Export & Import services
+│   ├── Memory/                     # Translation memory
+│   ├── Models/                     # Eloquent models
+│   ├── Scanners/                   # Project file scanner
+│   ├── Services/                   # Core business logic
+│   └── Translators/                # AI provider adapters
+└── tests/
+    ├── Feature/                    # Integration tests
+    └── Unit/                       # Unit tests
+```
+
+---
+
+## Testing
+
+```bash
+# Run all tests
+./vendor/bin/phpunit --testdox
+
+# Run only unit tests
+./vendor/bin/phpunit --testsuite Unit --testdox
+
+# Run only feature tests
+./vendor/bin/phpunit --testsuite Feature --testdox
+```
+
+Tests use **Orchestra Testbench** with an in-memory SQLite database — no external services required.
+
+---
+
+## Extending
+
+### Adding a Custom Translator
+
+Implement `Aar\AutoTranslator\Translators\TranslatorInterface`:
+
+```php
+use Aar\AutoTranslator\Translators\TranslatorInterface;
+
+class MyCustomTranslator implements TranslatorInterface
+{
+    public function translate(string $text, string $targetLang, string $sourceLang = 'en'): string
+    {
+        // your implementation
+    }
+
+    public function translateBatch(array $texts, string $targetLang, string $sourceLang = 'en'): array
+    {
+        return array_map(fn($t) => $this->translate($t, $targetLang, $sourceLang), $texts);
+    }
+
+    public function getProviderName(): string
+    {
+        return 'my-custom-translator';
+    }
+}
+```
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first.
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m 'Add my feature'`
+4. Push the branch: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+---
+
+## Credits
+
+Built with ❤️ using [Laravel](https://laravel.com), [TailwindCSS](https://tailwindcss.com), and [Alpine.js](https://alpinejs.dev).
